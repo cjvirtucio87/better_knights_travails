@@ -69,7 +69,9 @@ module KnightsTravails
 
       def make_adj_move(current,adj,depth)
         coords = calculate_coords(current,adj)
-        return Move.new(coords[0],coords[1],depth,[],current)
+        if valid?(coords)
+          return Move.new(coords[0],coords[1],depth,[],current)
+        end
       end
 
       def calculate_coords(current,adj)
@@ -80,6 +82,7 @@ module KnightsTravails
         coords.each do |coord|
           return if !(0..7).include?(coord)
         end
+        true
       end
 
   end

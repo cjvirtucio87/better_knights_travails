@@ -5,18 +5,29 @@ module KnightsTravails
 
       def bfs_for(key,tree)
         current = tree.root
-        while current
-          current.children.each_with_index do |child,i|
-            if match_coord(child,key)
-              return "Found at DEPTH #{current.depth}, index #{i}"
+        queue = [[current]]
+        until queue.empty?
+          current = queue.shift
+          if match_coord(current[0],key)
+            return "Found at depth level #{current[0].depth}, index #{current[1]}"
+          else
+            current[0].children.each_with_index do |child,i| 
+              queue.push([child,i])
             end
           end
-          current = current.children[0]
         end
-        raise "Can't find designated key."
+        raise "Couldn't find it"
       end
 
-      def dfs_for
+      def dfs_for(key,tree)
+        current = tree.root
+        stack = [[current]]
+        until stack.empty?
+          current = stack.pop
+          if match_coord(current[0],key)
+            return "Found at depth level #{current[0].depth}, index #{current[1]}"
+          end
+        end
       end
 
       private
