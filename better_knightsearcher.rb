@@ -26,8 +26,13 @@ module KnightsTravails
           current = stack.pop
           if match_coord(current[0],key)
             return "Found at depth level #{current[0].depth}, index #{current[1]}"
+          else
+            current[0].children.each_with_index do |child,i| 
+              stack.push([child,i])
+            end
           end
         end
+        raise "Couldn't find it"
       end
 
       private
@@ -37,6 +42,5 @@ module KnightsTravails
         end
 
     end
-
   end
 end
